@@ -2,7 +2,7 @@
 
 A comprehensive implementation and comparison of multiple heuristic algorithms for solving the Traveling Salesman Problem (TSP).
 
-## 🎯 Project Overview
+## Project Overview
 
 This project implements and compares four different heuristic approaches to solve the TSP:
 - **Nearest Neighbor (NN)** - Greedy constructive heuristic
@@ -10,7 +10,7 @@ This project implements and compares four different heuristic approaches to solv
 - **Simulated Annealing (SA)** - Metaheuristic with probabilistic acceptance
 - **Genetic Algorithm (GA)** - Custom evolutionary algorithm with Order Crossover
 
-## 🚀 Features
+## Features
 
 - **Data Collection**: Python script for automated geocoding of city coordinates
 - **Multiple Algorithms**: Four different optimization approaches implemented from scratch
@@ -18,7 +18,7 @@ This project implements and compares four different heuristic approaches to solv
 - **Performance Analysis**: Comparative results and route length optimization
 - **Real-world Application**: Tested on European cities dataset
 
-## 📊 Results
+## Results
 
 The algorithms were tested on a dataset of 17 European cities. Performance comparison:
 
@@ -31,13 +31,13 @@ The algorithms were tested on a dataset of 17 European cities. Performance compa
 
 All results are automatically exported to `TSP_results.xlsx` for further analysis.
 
-## 🛠️ Technical Stack
+## Technical Stack
 
 - **Python 3.x** - Data collection and preprocessing
 - **MATLAB R2020+** - Algorithm implementation and visualization
 - **Excel** - Data storage and results export
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 TSP-Heuristic-Optimization/
@@ -48,7 +48,7 @@ TSP-Heuristic-Optimization/
 └── TSP_results.xlsx        # Algorithm comparison results
 ```
 
-## 🔧 Usage
+## Usage
 
 ### Step 1: Generate City Coordinates
 ```bash
@@ -69,7 +69,7 @@ The script will:
 4. Generate route visualizations
 5. Export comparison results
 
-## 📈 Algorithm Details
+## Algorithm Details
 
 ### Nearest Neighbor (NN)
 - Time Complexity: O(n²)
@@ -93,26 +93,26 @@ The script will:
 - Tournament selection (size 2)
 - Mutation rate: 20%
 
-## 🎓 Applications
+## Applications
 
 - Logistics route optimization
 - Supply chain management
 - Transportation planning
 - Vehicle routing problems
 
-## 📝 Key Learnings
+## Key Learnings
 
 - Comparison of constructive vs. metaheuristic approaches
 - Trade-offs between computation time and solution quality
 - Practical implementation of evolutionary algorithms
 - MATLAB optimization and visualization techniques
 
-## 👤 Author
+## Author
 
 **Danilo Lazović**
 - Student of Management and Organization - Operations Management
 - Faculty of Organizational Sciences, University of Belgrade
 
-## 📄 License
+## License
 
 This project is available for educational and research purposes.
