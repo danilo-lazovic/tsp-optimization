@@ -1,0 +1,5 @@
+Method,LengthKm
+Nearest Neighbor,6520.5
+NN + 2-opt,5757.6
+Simulated Annealing,5645.1
+Genetic Algorithm,6119.3
