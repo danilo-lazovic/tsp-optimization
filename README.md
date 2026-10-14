@@ -1,111 +1,74 @@
 # TSP Heuristic Optimization
 
-A comprehensive implementation and comparison of multiple heuristic algorithms for solving the Traveling Salesman Problem (TSP).
+Four heuristics for the Traveling Salesman Problem, implemented from scratch and compared on 17 European cities. Every method is available both in **MATLAB** and in **Python**, and the Python version also computes the exact optimum, so you can see how far each heuristic is from the best possible route.
 
-## Project Overview
-
-This project implements and compares four different heuristic approaches to solve the TSP:
-- **Nearest Neighbor (NN)** - Greedy constructive heuristic
-- **2-OPT** - Local search improvement algorithm
-- **Simulated Annealing (SA)** - Metaheuristic with probabilistic acceptance
-- **Genetic Algorithm (GA)** - Custom evolutionary algorithm with Order Crossover
-
-## Features
-
-- **Data Collection**: Python script for automated geocoding of city coordinates
-- **Multiple Algorithms**: Four different optimization approaches implemented from scratch
-- **Visualization**: Graphical route representation for each algorithm
-- **Performance Analysis**: Comparative results and route length optimization
-- **Real-world Application**: Tested on European cities dataset
+![Routes](results/routes.png)
 
 ## Results
 
-The algorithms were tested on a dataset of 17 European cities. Performance comparison:
+Start and finish in Belgrade, distances are great-circle kilometres (`python -m tsp`, seed 42):
 
-| Algorithm | Route Length | Approach |
-|-----------|--------------|----------|
-| Nearest Neighbor | baseline | Constructive |
-| 2-OPT | improved | Local Search |
-| Simulated Annealing | optimized | Metaheuristic |
-| Genetic Algorithm | best | Evolutionary |
+| Method | Route length | Gap to optimum |
+|---|---:|---:|
+| Nearest Neighbor | 6,520 km | +15.5% |
+| NN + 2-opt | 5,758 km | +2.0% |
+| Simulated Annealing | 5,645 km | 0.0% |
+| Genetic Algorithm | 6,159 km | +9.1% |
+| **Optimum (Held-Karp)** | **5,645 km** | |
 
-All results are automatically exported to `TSP_results.xlsx` for further analysis.
+Simulated annealing finds the optimal tour. The genetic algorithm with pure swap mutation and no local search converges slowly, so it lands behind even the plain 2-opt result. Full routes are in [`results/results.csv`](results/results.csv); the MATLAB script writes the same comparison to `results/results_matlab.csv`.
 
-## Technical Stack
+## Methods
 
-- **Python 3.x** - Data collection and preprocessing
-- **MATLAB R2020+** - Algorithm implementation and visualization
-- **Excel** - Data storage and results export
-
-## Project Structure
-
-```
-TSP-Heuristic-Optimization/
-├── 4.py                    # Python geocoding script
-├── cities.txt              # Input city list
-├── cities.xlsx             # Generated coordinates
-├── projekat_kraj.m         # Main MATLAB implementation
-└── TSP_results.xlsx        # Algorithm comparison results
-```
+- **Nearest Neighbor**: greedy construction, always go to the closest unvisited city. O(n²).
+- **2-opt**: starting from the NN tour, reverse route segments while that removes crossings and shortens the tour.
+- **Simulated Annealing**: random 2-opt moves, accepting worse ones with probability e^(−Δ/T). T starts at 10% of the NN tour length and cools geometrically to 0.001 over 50,000 iterations.
+- **Genetic Algorithm**: population 100, 300 generations, tournament selection (size 2), Order Crossover (OX), swap mutation (20%), elitism.
+- **Held-Karp** (Python only): exact dynamic programming, O(2ⁿ·n²), practical up to about 18 cities.
 
 ## Usage
 
-### Step 1: Generate City Coordinates
+### Python
+
 ```bash
-python 4.py
-```
-This reads `cities.txt` and creates `cities.xlsx` with coordinates.
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 
-### Step 2: Run TSP Optimization
+python -m tsp                    # writes results/results.csv and results/routes.png
+python -m tsp --seed 7 --no-plot
+pytest                           # tests
+```
+
+### MATLAB
+
 ```matlab
-% In MATLAB
-run projekat_kraj.m
+run('matlab/tsp_heuristics.m')
 ```
 
-The script will:
-1. Load city coordinates from Excel
-2. Calculate distance matrix
-3. Run all four heuristics
-4. Generate route visualizations
-5. Export comparison results
+Works from any folder (R2016b or newer). It reads `data/cities.csv`, plots one figure per heuristic and writes `results/results_matlab.csv`.
 
-## Algorithm Details
+### Changing the cities
 
-### Nearest Neighbor (NN)
-- Time Complexity: O(n²)
-- Greedy approach: always visit nearest unvisited city
-- Fast but often suboptimal
+Edit `data/cities.txt` (one "City, Country" per line), then refresh the coordinates with OpenStreetMap:
 
-### 2-OPT
-- Iteratively removes crossing edges
-- Swaps route segments to reduce total distance
-- Local search refinement of NN solution
+```bash
+python scripts/geocode.py        # rewrites data/cities.csv
+```
 
-### Simulated Annealing
-- Temperature: 1000, Cooling: α=0.995
-- Iterations: 50,000
-- Probabilistic escape from local optima
+The repo already ships `data/cities.csv`, so this step is only needed when the list changes.
 
-### Genetic Algorithm (Custom)
-- Population: 100 individuals
-- Generations: 300
-- Order Crossover (OX) operator
-- Tournament selection (size 2)
-- Mutation rate: 20%
+## Project structure
 
-## Applications
-
-- Logistics route optimization
-- Supply chain management
-- Transportation planning
-- Vehicle routing problems
-
-## Key Learnings
-
-- Comparison of constructive vs. metaheuristic approaches
-- Trade-offs between computation time and solution quality
-- Practical implementation of evolutionary algorithms
-- MATLAB optimization and visualization techniques
+```
+data/cities.txt          city list (input for geocoding)
+data/cities.csv          City, Lon, Lat
+tsp/                     Python package: geo.py, heuristics.py, plot.py, __main__.py
+matlab/tsp_heuristics.m  MATLAB implementation
+scripts/geocode.py       city names -> coordinates
+tests/                   pytest tests
+results/                 generated comparison and plots
+```
 
 ## Author
 

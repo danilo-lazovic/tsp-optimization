@@ -1,0 +1,6 @@
+Method,LengthKm,Route
+Nearest Neighbor,6520.5,Belgrade -> Zrenjanin -> Novi Sad -> Sombor -> Subotica -> Budapest -> Vienna -> Graz -> Kosjerić -> Čačak -> Kragujevac -> Niš -> Sofia -> Torino -> Paris -> Amsterdam -> Minsk -> Belgrade
+NN + 2-opt,5757.6,Belgrade -> Kragujevac -> Sofia -> Niš -> Čačak -> Kosjerić -> Novi Sad -> Sombor -> Subotica -> Budapest -> Vienna -> Graz -> Torino -> Paris -> Amsterdam -> Minsk -> Zrenjanin -> Belgrade
+Simulated Annealing,5645.1,Belgrade -> Kosjerić -> Čačak -> Kragujevac -> Niš -> Sofia -> Minsk -> Amsterdam -> Paris -> Torino -> Graz -> Vienna -> Budapest -> Subotica -> Sombor -> Novi Sad -> Zrenjanin -> Belgrade
+Genetic Algorithm,6159.0,Belgrade -> Čačak -> Niš -> Sofia -> Kragujevac -> Kosjerić -> Novi Sad -> Subotica -> Sombor -> Torino -> Paris -> Amsterdam -> Minsk -> Vienna -> Graz -> Budapest -> Zrenjanin -> Belgrade
+Optimum (Held-Karp),5645.1,Belgrade -> Kosjerić -> Čačak -> Kragujevac -> Niš -> Sofia -> Minsk -> Amsterdam -> Paris -> Torino -> Graz -> Vienna -> Budapest -> Subotica -> Sombor -> Novi Sad -> Zrenjanin -> Belgrade
